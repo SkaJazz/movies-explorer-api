@@ -10,6 +10,7 @@ const { PORT = 3000 } = process.env;
 
 const { createUser, login } = require('./controllers/users');
 
+const { auth } = require('./middlewares/auth');
 const { limiter } = require('./middlewares/limiter');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
