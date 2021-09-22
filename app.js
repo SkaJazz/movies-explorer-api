@@ -1,6 +1,7 @@
 const express = require('express');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 require('dotenv').config();
 require('./db/mongoose');
@@ -16,7 +17,10 @@ const { errorHandler, errorSender } = require('./middlewares/errorHandlers');
 const { checkSignUpCredValidity, checkSignInCredValidity } = require('./middlewares/validationHandlers');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
-app.use(limiter, helmet());
+app.use(limiter, helmet(), cors({
+  credentials: true,
+  origin: '*',
+}));
 app.use(express.json(), cookieParser());
 
 app.use(requestLogger);
