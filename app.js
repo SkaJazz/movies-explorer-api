@@ -9,6 +9,7 @@ const app = express();
 const { PORT = 3000 } = process.env;
 
 const { createUser, login } = require('./controllers/users');
+const { errorHandler, errorSender } = require('./middlewares/errorHandlers');
 
 const { auth } = require('./middlewares/auth');
 const { limiter } = require('./middlewares/limiter');
@@ -26,5 +27,7 @@ app.use('/users', auth, require('./routes/users'));
 app.use('/movies', auth, require('./routes/movies'));
 
 app.use(errorLogger);
+
+app.use(errorHandler, errorSender);
 
 app.listen(PORT);
