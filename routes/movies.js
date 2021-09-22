@@ -2,7 +2,7 @@ const router = require('express').Router();
 const {
   getUsersMovies,
   createMovie,
-  // removeMovie,
+  removeMovie,
 } = require('../controllers/movies');
 
 // const {
@@ -12,6 +12,6 @@ const {
 
 router.get('/', getUsersMovies);
 router.post('/', createMovie);
-// router.delete('/:cardId', checkCardIdValidity, removeCard);
+router.delete('/:movieId', removeMovie);
 
 module.exports = router;
