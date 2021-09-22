@@ -10,6 +10,27 @@ const getCurrentUserInfo = (req, res, next) => User.findById(req.user._id)
   .then(({ name, email }) => res.send({ name, email }))
   .catch(next);
 
+// UPDATE USERINFO
+const updateUserInfo = (req, res, next) => {
+  const userId = req.user._id;
+  const { name, email } = req.body;
+
+  User.findByIdAndUpdate(
+    userId,
+    { name, email },
+    {
+      new: true,
+      omitUndefined: true, // no data => no updates
+      runValidators: true, // check if user data could fit into schema
+    },
+  )
+    .orFail(new Error('Not found'))
+    .then(({ name: userName, email: userEmail }) => {
+      res.send({ name: userName, email: userEmail });
+    })
+    .catch(next);
+};
+
 // CREATE USER
 const createUser = (req, res, next) => {
   const { name, email, password } = req.body;
@@ -49,6 +70,7 @@ const login = (req, res, next) => {
 
 module.exports = {
   getCurrentUserInfo,
+  updateUserInfo,
   createUser,
   login,
 };

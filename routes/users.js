@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const {
   // getUserById,
-  // updateUserInfo,
+  updateUserInfo,
   // updateUserAvatar,
   getCurrentUserInfo,
 } = require('../controllers/users');
@@ -13,8 +13,8 @@ const {
 // } = require('../middlewares/validateHandlers');
 
 router.get('/me', getCurrentUserInfo);
+router.patch('/me', updateUserInfo);
 // router.get('/:userId', checkUserIdValidity, getUserById);
-// router.patch('/me', checkUserInfoUpdateValidity, updateUserInfo);
 // router.patch('/me/avatar', checkUserInfoUpdateAvatarValidity, updateUserAvatar);
 
 module.exports = router;
