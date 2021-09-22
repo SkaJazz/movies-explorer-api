@@ -2,6 +2,8 @@ const express = require('express');
 const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 
+require('dotenv').config();
+
 const app = express();
 
 const { limiter } = require('./middlewares/limiter');
