@@ -2,8 +2,6 @@ const jwt = require('jsonwebtoken');
 
 const { JWT_SECRET } = require('../utils/constants');
 
-console.log(JWT_SECRET);
-
 module.exports = {
   auth: (req, res, next) => {
     const token = req.headers
