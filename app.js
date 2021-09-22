@@ -27,6 +27,8 @@ app.post('/signin', checkSignInCredValidity, login);
 app.use('/users', auth, require('./routes/users'));
 app.use('/movies', auth, require('./routes/movies'));
 
+app.use(require('./routes/404'));
+
 app.use(errorLogger);
 
 app.use(errorHandler, errorSender);
