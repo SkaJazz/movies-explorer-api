@@ -1,4 +1,5 @@
 const JWT_SECRET = process.env.NODE_ENV === 'production' ? process.env.JWT_SECRET : 'secretkey';
+const PORT = process.env.NODE_ENV === 'production' ? process.env.PORT : 3000;
 
 const BAD_REQUEST_ERROR_CODE = 400;
 const UNAUTHORIZED_ERROR_CODE = 401;
@@ -8,6 +9,7 @@ const DUPLICATE_EMAIL_CODE = 409;
 const GENERAL_SERVER_ERROR_CODE = 500;
 
 module.exports = {
+  PORT,
   JWT_SECRET,
   BAD_REQUEST_ERROR_CODE,
   UNAUTHORIZED_ERROR_CODE,

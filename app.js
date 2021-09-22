@@ -5,9 +5,9 @@ const cors = require('cors');
 
 require('dotenv').config();
 require('./db/mongoose');
+const { PORT } = require('./utils/constants');
 
 const app = express();
-const { PORT = 3000 } = process.env;
 
 const { createUser, login } = require('./controllers/users');
 
