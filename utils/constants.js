@@ -1,4 +1,4 @@
-const { JWT_SECRET = 'secretkey' } = process.env;
+const JWT_SECRET = process.env.NODE_ENV === 'production' ? process.env.JWT_SECRET : 'secretkey';
 
 const BAD_REQUEST_ERROR_CODE = 400;
 const UNAUTHORIZED_ERROR_CODE = 401;
