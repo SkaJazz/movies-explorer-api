@@ -7,11 +7,15 @@ require('./db/mongoose');
 
 const app = express();
 
+const { PORT = 3000 } = process.env;
 const { limiter } = require('./middlewares/limiter');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 app.use(limiter, helmet());
 app.use(express.json(), cookieParser());
 
-const { PORT = 3000 } = process.env;
+app.use(requestLogger);
+
+app.use(errorLogger);
 
 app.listen(PORT);
