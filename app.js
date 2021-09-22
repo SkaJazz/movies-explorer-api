@@ -1,12 +1,13 @@
 const express = require('express');
 const helmet = require('helmet');
-// const cookieParser = require('cookie-parser');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 
 const { limiter } = require('./middlewares/limiter');
 
 app.use(limiter, helmet());
+app.use(express.json(), cookieParser());
 
 const { PORT = 3000 } = process.env;
 
