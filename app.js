@@ -9,10 +9,11 @@ const app = express();
 const { PORT = 3000 } = process.env;
 
 const { createUser, login } = require('./controllers/users');
-const { errorHandler, errorSender } = require('./middlewares/errorHandlers');
 
 const { auth } = require('./middlewares/auth');
 const { limiter } = require('./middlewares/limiter');
+const { errorHandler, errorSender } = require('./middlewares/errorHandlers');
+const { checkSignUpCredValidity, checkSignInCredValidity } = require('./middlewares/validationHandlers');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 app.use(limiter, helmet());
@@ -20,8 +21,8 @@ app.use(express.json(), cookieParser());
 
 app.use(requestLogger);
 
-app.post('/signup', createUser);
-app.post('/signin', login);
+app.post('/signup', checkSignUpCredValidity, createUser);
+app.post('/signin', checkSignInCredValidity, login);
 
 app.use('/users', auth, require('./routes/users'));
 app.use('/movies', auth, require('./routes/movies'));
