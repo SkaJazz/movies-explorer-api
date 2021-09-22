@@ -1,5 +1,11 @@
 const Movie = require('../models/movie');
 
+// GET USER'S MOVIES
+const getUsersMovies = (req, res, next) => Movie.find({ owner: req.user._id })
+  .orFail(new Error('Not found'))
+  .then((movies) => res.send({ movies }))
+  .catch(next);
+
 // CREATE MOVIE
 const createMovie = (req, res, next) => {
   const {
@@ -36,5 +42,6 @@ const createMovie = (req, res, next) => {
 };
 
 module.exports = {
+  getUsersMovies,
   createMovie,
 };

@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {
-  // getMovies,
+  getUsersMovies,
   createMovie,
   // removeMovie,
 } = require('../controllers/movies');
@@ -10,7 +10,7 @@ const {
 //   checkMovieIdValidity,
 // } = require('../middlewares/validateHandlers');
 
-// router.get('/', getAllCards);
+router.get('/', getUsersMovies);
 router.post('/', createMovie);
 // router.delete('/:cardId', checkCardIdValidity, removeCard);
 
