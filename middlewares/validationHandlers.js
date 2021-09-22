@@ -16,9 +16,24 @@ const isEmail = (val) => {
 };
 
 const checkUserInfoUpdateValidity = celebrate({
-  [Segments.PARAMS]: Joi.object().keys({
+  [Segments.BODY]: Joi.object().keys({
     email: Joi.string().custom(isEmail),
     name: Joi.string().min(5).max(30),
+  }),
+});
+
+const checkSignUpCredValidity = celebrate({
+  [Segments.BODY]: Joi.object().keys({
+    email: Joi.string().custom(isEmail).required(),
+    name: Joi.string().min(5).max(30).required(),
+    password: Joi.string().required(),
+  }),
+});
+
+const checkSignInCredValidity = celebrate({
+  [Segments.BODY]: Joi.object().keys({
+    email: Joi.string().custom(isEmail).required(),
+    password: Joi.string().required(),
   }),
 });
 
@@ -50,7 +65,8 @@ const checkMovieValidity = celebrate(
 );
 
 module.exports = {
-  // checkCredentialsValidity,
+  checkSignUpCredValidity,
+  checkSignInCredValidity,
   checkUserInfoUpdateValidity,
   checkMovieValidity,
   checkMovieIdValidity,
