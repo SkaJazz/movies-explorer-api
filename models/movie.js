@@ -27,7 +27,7 @@ const movieSchema = new mongoose.Schema(
       type: String,
       required: true,
       validate: {
-        validator: validator.isUrl,
+        validator: validator.isURL,
         message: '{VALUE} is not a valid URL to be an image link',
       },
     },
@@ -35,7 +35,7 @@ const movieSchema = new mongoose.Schema(
       type: String,
       required: true,
       validate: {
-        validator: validator.isUrl,
+        validator: validator.isURL,
         message: '{VALUE} is not a valid URL to be a trailer link',
       },
     },
@@ -43,7 +43,7 @@ const movieSchema = new mongoose.Schema(
       type: String,
       required: true,
       validate: {
-        validator: validator.isUrl,
+        validator: validator.isURL,
         message: '{VALUE} is not a valid URL to be a thumbnail link',
       },
     },
