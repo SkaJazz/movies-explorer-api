@@ -4,6 +4,12 @@ const User = require('../models/user');
 
 const { JWT_SECRET } = require('../utils/constants');
 
+// GET CURRENT USER INFO
+const getCurrentUserInfo = (req, res, next) => User.findById(req.user._id)
+  .orFail(new Error('Not found'))
+  .then(({ name, email }) => res.send({ name, email }))
+  .catch(next);
+
 // CREATE USER
 const createUser = (req, res, next) => {
   const { name, email, password } = req.body;
@@ -22,7 +28,6 @@ const createUser = (req, res, next) => {
 };
 
 // LOGIN
-
 const login = (req, res, next) => {
   const { email, password } = req.body;
 
@@ -43,6 +48,7 @@ const login = (req, res, next) => {
 };
 
 module.exports = {
+  getCurrentUserInfo,
   createUser,
   login,
 };

@@ -22,6 +22,8 @@ app.use(requestLogger);
 app.post('/signup', createUser);
 app.post('/signin', login);
 
+app.use('/users', auth, require('./routes/users'));
+
 app.use(errorLogger);
 
 app.listen(PORT);
