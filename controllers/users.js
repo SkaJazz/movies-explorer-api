@@ -1,5 +1,8 @@
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+
+const { JWT_SECRET } = require('../utils/constants');
 
 // CREATE USER
 const createUser = (req, res, next) => {
@@ -18,6 +21,28 @@ const createUser = (req, res, next) => {
   });
 };
 
+// LOGIN
+
+const login = (req, res, next) => {
+  const { email, password } = req.body;
+
+  User.findOne({ email })
+    .select('+password')
+    .orFail(new Error('Not Authorized'))
+    .then((user) => bcrypt.compare(password, user.password).then((matched) => {
+      if (matched) {
+        return res.send({
+          token: jwt.sign({ _id: user._id }, JWT_SECRET, {
+            expiresIn: '7d',
+          }),
+        });
+      }
+      throw new Error('Not Authorized');
+    }))
+    .catch(next);
+};
+
 module.exports = {
   createUser,
+  login,
 };
