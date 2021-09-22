@@ -23,6 +23,7 @@ app.post('/signup', createUser);
 app.post('/signin', login);
 
 app.use('/users', auth, require('./routes/users'));
+app.use('/movies', auth, require('./routes/movies'));
 
 app.use(errorLogger);
 
