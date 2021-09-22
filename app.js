@@ -3,6 +3,7 @@ const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 
 require('dotenv').config();
+require('./db/mongoose');
 
 const app = express();
 
