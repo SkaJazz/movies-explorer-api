@@ -5,13 +5,13 @@ const {
   removeMovie,
 } = require('../controllers/movies');
 
-// const {
-//   checkMovieValidity,
-//   checkMovieIdValidity,
-// } = require('../middlewares/validateHandlers');
+const {
+  checkMovieValidity,
+  checkMovieIdValidity,
+} = require('../middlewares/validationHandlers');
 
 router.get('/', getUsersMovies);
-router.post('/', createMovie);
-router.delete('/:movieId', removeMovie);
+router.post('/', checkMovieValidity, createMovie);
+router.delete('/:movieId', checkMovieIdValidity, removeMovie);
 
 module.exports = router;
