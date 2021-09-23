@@ -17,8 +17,8 @@ const isEmail = (val) => {
 
 const checkUserInfoUpdateValidity = celebrate({
   [Segments.BODY]: Joi.object().keys({
-    email: Joi.string().custom(isEmail),
-    name: Joi.string().min(5).max(30),
+    email: Joi.string().custom(isEmail).required(),
+    name: Joi.string().min(5).max(30).required(),
   }),
 });
 
