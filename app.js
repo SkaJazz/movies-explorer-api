@@ -17,13 +17,13 @@ const { errorHandler, errorSender } = require('./middlewares/errorHandlers');
 const { checkSignUpCredValidity, checkSignInCredValidity } = require('./middlewares/validationHandlers');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
+app.use(requestLogger);
+
 app.use(limiter, helmet(), cors({
   credentials: true,
   origin: '*',
 }));
 app.use(express.json(), cookieParser());
-
-app.use(requestLogger);
 
 app.post('/signup', checkSignUpCredValidity, createUser);
 app.post('/signin', checkSignInCredValidity, login);
